@@ -1,9 +1,9 @@
 <?php 
 
-function connection () : PDO
+function connectiondb () : PDO
 {
     try{
-        $database = new PDO('mysql:host=localhost;dbname=connexion_blog;charset=utf8','root','');
+        $database = new PDO('mysql:host=localhost;dbname=recettes;charset=utf8','root','');
         $database->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         return $database;
     }
@@ -15,7 +15,7 @@ function connection () : PDO
 
 function inscription($mail,$pseudo,$ville,$mdp,$age)
 {
-$database = connection ();
+$database = connectiondb ();
 $request = " INSERT INTO comptes (Mail,Pseudo,Age,Ville,Motdepasse) VALUES (:mail,:pseudo,:age,:ville,:mdp) ";
 $requête = $database ->prepare($request);
 $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
@@ -29,7 +29,7 @@ $requête -> execute();
 
 function getutilisateur(string $mail) 
 {
-$database = connection ();
+$database = connectiondb ();
 $request = "SELECT * FROM comptes
 WHERE Mail=:mail"; // WHERE Colonne=:Valeur
 $requête = $database->prepare($request);
@@ -41,7 +41,7 @@ return $result ;
 
 function getmdp(string $mail)
 {
-$database = connection ();
+$database = connectiondb ();
 $request = ' SELECT Motdepasse FROM comptes 
 WHERE Mail=:mail';
 $requête = $database ->prepare($request);
@@ -53,7 +53,7 @@ return $result['Motdepasse'] ;
 
 function getpseudo(string $mail) 
 {
-    $database = connection ();
+    $database = connectiondb ();
     $request = ' SELECT Pseudo FROM comptes 
     WHERE Mail=:mail';
     $requête = $database ->prepare($request);
@@ -65,7 +65,7 @@ function getpseudo(string $mail)
 
     function getville(string $mail) 
     {
-        $database = connection ();
+        $database = connectiondb ();
         $request = ' SELECT Ville FROM comptes 
         WHERE Mail=:mail';
         $requête = $database ->prepare($request);
@@ -77,7 +77,7 @@ function getpseudo(string $mail)
     
         function getage(string $mail) 
         {
-            $database = connection ();
+            $database = connectiondb ();
             $request = ' SELECT Age FROM comptes 
             WHERE Mail=:mail';
             $requête = $database ->prepare($request);
@@ -89,7 +89,7 @@ function getpseudo(string $mail)
 
             function modifierProfil($newmail,$pseudo,$ville,$age,$mail)
             {
-            $database = connection ();
+            $database = connectiondb ();
             $request = " UPDATE comptes
             SET Mail = :newmail,
             Pseudo = :pseudo,
@@ -107,7 +107,7 @@ function getpseudo(string $mail)
 
             function modifierMdp($mdp,$mail)
             {
-                $database = connection ();
+                $database = connectiondb ();
                 $request = " UPDATE comptes
                 SET Motdepasse = :mdp
                 WHERE Mail = :mail";
@@ -116,4 +116,71 @@ function getpseudo(string $mail)
                 $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
                 $requête -> execute(); 
                 }
+
+                function getRecettes()
+                {
+                $database = connectiondb();
+                $request = " SELECT * from recette";
+                $result = $database->query($request);
+                return $result;
+                }
+
+                function getIngredient($id)
+                {
+                $database = connectiondb();
+                $request = "SELECT i.nom,i.image,q.quantite FROM recette as r
+                INNER JOIN quantites as q ON r.id=q.id_recette
+                INNER JOIN ingredient as i ON i.id = q.id_ingredient
+                WHERE r.id=:id";
+                $requête = $database ->prepare($request);
+                $requête -> execute(['id'=>$id]); 
+                $result= $requête ->fetchAll();
+                return $result;    
+                }
+
+                function getQuantites($id)
+                {
+                $database = connectiondb();
+                $request = "SELECT i.nom,i.image FROM recette as r
+                INNER JOIN quantites as q ON r.id=q.id_recette
+                INNER JOIN ingredient as i ON i.id = q.id_ingredient
+                WHERE r.id=:id";
+                $requête = $database ->prepare($request);
+                $requête -> execute(['id'=>$id]); 
+                $result= $requête ->fetchAll();
+                return $result;    
+                }
+
+                function getEtape($id)
+                {$database = connectiondb();
+                    $request = "SELECT nom,description,numero FROM etape as e
+                    WHERE id_recette=:id ORDER BY numero ASC";
+                    $requête = $database ->prepare($request);
+                    $requête -> execute(['id'=>$id]); 
+                    $result= $requête ->fetchAll();
+                    return $result;
+                }
+
+                function getCommentaire($id)
+                {$database = connectiondb();
+                    $request = "SELECT * FROM commentaires
+                    WHERE id_recette=:id ORDER BY date ASC";
+                    $requête = $database ->prepare($request);
+                    $requête -> execute(['id'=>$id]); 
+                    $result= $requête ->fetchAll();
+                    return $result;
+                }
+
+                function posterCom($commentaire,$date,$auteur,$id_recette)
+                    {
+                    $database = connectiondb ();
+                    $request = " INSERT INTO commentaires (commentaire,date,auteur,id_recette) VALUES (:commentaire,:date,:auteur,:id_recette) ";
+                    $requête = $database ->prepare($request);
+                    $requête ->bindParam(":commentaire",$commentaire,PDO::PARAM_STR);
+                    $requête ->bindParam(":date",$date,PDO::PARAM_STR);
+                    $requête ->bindParam(":auteur",$auteur,PDO::PARAM_STR);
+                    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_STR);
+                    $requête -> execute(); 
+                    }
 ?>
+

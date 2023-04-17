@@ -1,21 +1,45 @@
 <?php 
 require 'header.php';
+require 'fonction.php';
+$recettes=getRecettes();
 ?>
+<DOCTYPE html>
+<html>
 
-
-<div class="card" style="width: 18rem;">
-  <img src="https://i.goopics.net/83r75t.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">spaghetti bolognaise</h5>
-    <p class="card-text">une recette à base de sauce tomate à la viande, plus ou moins proche de la version de Bologne, servie sur des spaghettis, avec une couche de parmesan râpé.</p>
+<div class='row'>
+  <?php
+  foreach($recettes as $recette)
+  //$recettes = tableau
+  //recette = ligne de tableau recettes
+  {
+  $ingredients=getIngredient($recette['id']);
+  ?>
+  <div class="card m-5" style="width: 18rem;">
+    <img src="<?= $recette['image'] ?>" class="card-img-top" alt="<?=$recette["nom"]?>">
+    <div class="card-body">
+      <h5 class="card-title"><?= $recette['nom'] ?></h5>
+      <p class="card-text"><?= $recette['description'] ?></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Temps : <?= $recette['temps'] ?></li>
+      <li class="list-group-item">Ingrédient :
+      <?php
+  $i=0;
+  foreach($ingredients as $ingredient) 
+  {
+  $i++;
+  echo count($ingredients)!=$i ? $ingredient['nom'].' , ' : $ingredient['nom'] ;
+  } 
+      ?>
+      </li>
+      <li class="list-group-item">Auteur : <?= $recette['auteur'] ?>
+  </li>
+    </ul>
+    <div class="card-body">
+      <a href="recette.php?id=<?=$recette['id']?>" class="card-link">Voir cette recette</a>
+    </div>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Temps estimé : 30 min</li>
-    <li class="list-group-item">ingrédients : pâtes , sauce bolognaise , boeuf haché</li>
-    <li class="list-group-item">Auteur : Michou
-</li>
-  </ul>
-  <div class="card-body">
-    <a href="spaghetti.php" class="card-link">Voir cette recette</a>
-  </div>
+  <?php
+  }
+  ?>
 </div>
