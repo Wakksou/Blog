@@ -192,5 +192,15 @@ function getpseudo(string $mail)
                     $result = $requête -> fetchAll();
                     return $result ;
                     }
+
+                    function deleteUtilisateur($id)
+                    {
+                        $database = connectiondb ();
+                        $request = "DELETE FROM comptes
+                        WHERE IDCompte = :id";
+                        $requête = $database->prepare($request);
+                        $requête ->bindParam(":id",$id,PDO::PARAM_INT);
+                        $requête -> execute();
+                    }
 ?>
 

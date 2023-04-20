@@ -5,37 +5,30 @@ $Users=getAllUtilisateur();
 $i=1;
 ?>
 </br>
-<div class="card" style="width: 55rem;">
-  <div class="card-body text-center">
-    <h5 class="card-title">Liste des utilisateurs</h5>
-  </div>
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Pseudo</th>
-      <th scope="col">Mail</th>
-      <th scope="col">Statut</th>
-      <th scope="col">Connexion</th>
-    </tr>
-  </thead>
-  <tbody>
-    
-    <?php foreach ($Users as $User) 
-        {
-    ?>
-    <tr>
-      <th scope="row"><?= $i ?></th>
-      <td><?= $User['Pseudo']?></td>
-      <td><?= $User['Mail'] ?></td>
-      <td><?php if ($User['Moderateur'] ==true)
-      {echo 'Modérateur';} else echo 'Membre' ?></td>
-      <td>16/05/2023</td>
-    </tr>
-    <?php
-    $i++;
-        }
-        ?>
-  </tbody>
-</table>
-</div>
+<p>
+                <button class="btn btn-outline-secondary" type="button"data-toggle="collapse" data-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Ajouter</button>
+                <div style="min-height: 120px;">
+                    <div class="collapse width" id="collapseWidthExample">
+                        <div class="card card-body" style="width: 320px;">
+                        <form action="" method="post">
+                        Pseudo
+                        <div class="input-group mb-3">
+                            <label for="exampleInputPassword1" class="form-label"></label>
+                            <input placeholder= 'Lulustucru' name = "pseudo" type="text" class="form-control" id="exampleInputPassword1" class="form-text">
+                        </div>
+                        Mail
+                        <div class="input-group mb-3">
+                            <label for="exampleInputPassword1" class="form-label"></label>
+                            <input placeholder= 'email@mail.com' name = "email" type="email" class="form-control" id="exampleInputPassword1" class="form-text">
+                        </div>
+                        Mot de passe
+                        <div class="input-group mb-3">
+                            <label for="exampleInputPassword1" class="form-label"></label>
+                            <input placeholder= 'MoTdEPAssE9!72?' name = "password" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
+                        </div>
+                        <input type="submit" value="Modifier">
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                </p>
