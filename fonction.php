@@ -182,5 +182,15 @@ function getpseudo(string $mail)
                     $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_STR);
                     $requête -> execute(); 
                     }
+
+                    function getAllUtilisateur() 
+                    {
+                    $database = connectiondb ();
+                    $request = "SELECT * FROM comptes";
+                    $requête = $database->prepare($request);
+                    $requête -> execute();
+                    $result = $requête -> fetchAll();
+                    return $result ;
+                    }
 ?>
 

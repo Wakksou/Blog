@@ -27,7 +27,21 @@ if (!empty ($_SESSION['email']) && !empty ($_POST['commentaire']))
   }
 elseif (!isset($_SESSION['email']) && !empty ($_POST['commentaire']))
     {
-        echo 'Vous devez être connecté pour poster un commentaire';
+      ?>
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded mr-2" alt="...">
+        <strong class="mr-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
+    <?php
     }
 ?>
 
@@ -155,7 +169,7 @@ $etapes=getEtape($recette_id);
           <label for="exampleFormControlTextarea1">Poster un commentaire</label>
           <textarea class="form-control" name="commentaire" rows="3"></textarea>
         </div>
-        <input type="submit" value="Poster">
+        <input type="submit" class='btn btn-secondary' value="Poster">
       </form>
     </div>
   </div>

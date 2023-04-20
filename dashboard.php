@@ -17,6 +17,7 @@ $i=1;
       <th scope="col">Mail</th>
       <th scope="col">Statut</th>
       <th scope="col">Connexion</th>
+      <th scope="col">Configuration</th>
     </tr>
   </thead>
   <tbody>

@@ -31,6 +31,15 @@
             <?php
             }
           ?>
+          <?php if (!empty ($_SESSION['email']) ){
+          if ($_SESSION['email']=="maxime.dingival@hotmail.com") { ?>
+            <li class="nav-item ">
+            <a class="nav-link" href="http://localhost/Blog/Blog/dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
+            </li>
+            <?php
+            }
+            }
+          ?>
     </ul> 
     <?php if (empty ($_SESSION['email']) ){ ?>
     <a class="nav-link "href="http://localhost/Blog/Blog/compte/connexion.php">Connexion</a>
