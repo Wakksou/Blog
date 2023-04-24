@@ -25,7 +25,28 @@ $requête ->bindParam(":ville",$ville,PDO::PARAM_STR);
 $requête ->bindParam(":mdp",$mdp,PDO::PARAM_STR);
 $requête -> execute(); 
 }
+function CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps)
+{
+$database = connectiondb ();
+$request = " INSERT INTO recette (nom,description,image,auteur,temps) VALUES (:nom,:description,:image,:auteur,:temps) ";
+$requête = $database ->prepare($request);
+$requête ->bindParam(":nom",$NomRecette,PDO::PARAM_STR);
+$requête ->bindParam(":description",$DescriptionRecette,PDO::PARAM_STR);
+$requête ->bindParam(":image",$image,PDO::PARAM_STR);
+$requête ->bindParam(":auteur",$auteur,PDO::PARAM_STR);
+$requête ->bindParam(":temps",$temps,PDO::PARAM_STR);
+$requête -> execute(); 
+}
 
+function CreerIngredients($ingredient,$Image)
+{
+$database = connectiondb ();
+$request = " INSERT INTO ingredient (nom,image) VALUES (:nom,:image) ";
+$requête = $database ->prepare($request);
+$requête ->bindParam(":nom",$ingredient,PDO::PARAM_STR);
+$requête ->bindParam(":image",$Image,PDO::PARAM_STR);
+$requête -> execute(); 
+}
 
 function getutilisateur(string $mail) 
 {
@@ -164,7 +185,7 @@ function getpseudo(string $mail)
                 function getCommentaire($id)
                 {$database = connectiondb();
                     $request = "SELECT * FROM commentaires
-                    WHERE id_recette=:id ORDER BY date ASC";
+                    WHERE id_recette=:id ORDER BY date DESC";
                     $requête = $database ->prepare($request);
                     $requête -> execute(['id'=>$id]); 
                     $result= $requête ->fetchAll();
@@ -201,6 +222,28 @@ function getpseudo(string $mail)
                         $requête = $database->prepare($request);
                         $requête ->bindParam(":id",$id,PDO::PARAM_INT);
                         $requête -> execute();
+                    }
+                    
+                    function deleteCommentaire($id)
+                    {
+                        $database = connectiondb ();
+                        $request = "DELETE FROM commentaires
+                        WHERE id = :id";
+                        $requête = $database->prepare($request);
+                        $requête ->bindParam(":id",$id,PDO::PARAM_INT);
+                        $requête -> execute();
+                    }
+
+                    function LastConnexion($date,$mail)
+                    {
+                    $database = connectiondb ();
+                    $request = " UPDATE comptes 
+                    SET LastConnexion= :LastConnexion 
+                    WHERE Mail = :mail";
+                    $requête = $database ->prepare($request);
+                    $requête ->bindParam(":LastConnexion",$date,PDO::PARAM_STR);
+                    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
+                    $requête -> execute(); 
                     }
 ?>
 

@@ -11,7 +11,7 @@ else header("Location: index.php");
 if (!empty ($_SESSION['email']) && !empty ($_POST['commentaire']))
 { 
       $commentaire=$_POST['commentaire'];
-      $date=date('l jS \of F Y h:i:s A');
+      $date=date("Y-m-d H:i:s");
       $auteur=$_SESSION['Pseudo'];
 
     try 
@@ -157,6 +157,16 @@ $etapes=getEtape($recette_id);
               <blockquote class="blockquote mb-0">
                 <p><h6><?= $commentaire['commentaire'] ?></h5></p>
                 <footer class="blockquote-footer"><?= $commentaire['date'] ?></cite></footer>
+                <?php
+                if ($_SESSION['email']=='maxime.dingival@hotmail.com'||$_SESSION['Pseudo']==$commentaire['auteur'])
+                { ?>
+                  <a href='http://localhost/Blog/Blog/supprimerCom.php?id=<?=$commentaire['id']?>&recette_id=<?=$recette_id?>'>
+                  <button type="button" class="btn btn-outline-secondary">Supprimer</button>
+                  </a>
+                <?php
+                }
+                ?>
+                </div>
               </blockquote>
             </div>
           </div>

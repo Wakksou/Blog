@@ -76,7 +76,7 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
         <td><?= $User['Mail'] ?></td>
         <td><?php if ($User['Moderateur'] ==true)
         {echo 'Modérateur';} else echo 'Membre' ?></td>
-        <td>16/05/2023</td>
+        <td><?= $User['LastConnexion'] ?></td>
         <td>
           <a href='http://localhost/Blog/Blog/compte/supprimerProfil.php?id=<?=$User['IDCompte']?>'>
         <button type="button" class="btn btn-outline-secondary">Supprimer</button>

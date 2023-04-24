@@ -17,6 +17,8 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) )
         $_SESSION['Ville']= getville($_SESSION['email']);
         $mail = $_SESSION['email'];
         $_SESSION['Age']= getage($mail);
+        $date=date("Y-m-d H:i:s");
+        LastConnexion($date,$mail);
         header('Location: http://localhost/Blog/Blog/index.php');
     }
     else 

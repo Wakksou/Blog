@@ -1,30 +1,39 @@
 <?php 
 require 'header.php';
 require "fonction.php";
-$Users=getAllUtilisateur();
-$i=1;
+if (isset($_GET['id']))
+{
+$NombreIngredients=$_GET['id'];
+$NombreEtape=$_GET['Etapeid'];
+}
+else header("Location: index.php");
+$check=true;
+for ($o=1;$o<=$NombreIngredients;$o++)
+{
+    if (empty ($_POST['Ingrédient'.$i.''])) 
+    $check=false;
+    break;
+}
+if ($check=true)
+{
+    $NomRecette=$_POST['NomRecette'];
+    $DescriptionRecette=$_POST['DescriptionRecette'];
+    $image=$_POST['image'];
+
+    header ('Location: http://localhost/Blog/Blog/CreerEtapes.php?id='.$NombreEtape.'');
+}
+
 ?>
-<form action="" method="post">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Ajouter un ingrédient</label>
-    <input type="text" class="form-control" id="NomRecette" placeholder="patate" name="NomIngredient">
-    <input type="submit" value="Ajouter">
-  </div>
+
 <form action="" method="post">
 <?php
-    for ($i=1;$i<=10;$i++)
+    for ($i=1;$i<=$NombreIngredients;$i++)
     {
     ?>
         <div class="row">
             <div class='col'>
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Ingredient</label>
-  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-    <option selected>Choose...</option>
-    <?php for ($n=1;$n<=50;$n++)
-    { ?>
-    <option value="<?=$n?>"><?=$n?></option>
-    <?php } ?>
-  </select>
+                <label for="exampleFormControlInput1">Ingrédient <?=$i?></label>
+                <input type="text" class="form-control" id="NomRecette" placeholder="patate" name="Ingredient<?=$i?>">
             </div>
             <div class='col'>
                 <label for="exampleFormControlInput1">Quantités</label>
@@ -41,4 +50,3 @@ $i=1;
     ?>
     <input type="submit" value="Suivant">
 </form>
-
