@@ -3,6 +3,13 @@ require 'header.php';
 require "fonction.php";
 $Users=getAllUtilisateur();
 $i=1;
+
+if ($_SESSION['Moderateur']==0)
+{
+  header("Location: http://localhost/Blog/Blog/index.php");
+  exit();
+}
+
 if (!empty ($_POST['email']) && !empty ( $_POST['password']) && !empty ( $_POST['pseudo'])) 
 {
 
@@ -69,6 +76,7 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
     <tbody>
     <?php foreach ($Users as $User) 
     {
+
     ?>
       <tr>
         <th scope="row"><?= $i ?></th>
@@ -86,6 +94,7 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
     <?php
     $i++;
         }
+        
         ?>
     </tbody>
   </table>

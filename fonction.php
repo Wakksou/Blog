@@ -84,6 +84,18 @@ function getpseudo(string $mail)
     return $result['Pseudo'] ;
     }
 
+    function getModerateur(string $mail) 
+{
+    $database = connectiondb ();
+    $request = ' SELECT Moderateur FROM comptes 
+    WHERE Mail=:mail';
+    $requête = $database ->prepare($request);
+    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);;
+    $requête -> execute();
+    $result = $requête -> fetch(); 
+    return $result['Moderateur'] ;
+    }
+
     function getville(string $mail) 
     {
         $database = connectiondb ();

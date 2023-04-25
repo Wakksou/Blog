@@ -21,7 +21,7 @@
         <a class="nav-link" href="http://localhost/Blog/Blog/index.php">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="http://localhost/Blog/Blog/creerRecette.php">Créer une recette <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://localhost/Blog/Blog/CreerUneRecette/creerRecette.php">Créer une recette <span class="sr-only">(current)</span></a>
       </li>
       
           <?php if (!empty ($_SESSION['email']) ){ ?>

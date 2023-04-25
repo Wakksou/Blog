@@ -1,7 +1,7 @@
 
 <?php 
-require 'header.php';
-require "fonction.php";
+require "../fonction.php";
+require "../header.php";
 if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !empty ( $_POST['temps']) && !empty ($_POST['NombreIngredients'])
 && !empty ($_POST['NombreEtape'])) 
 {
@@ -15,7 +15,7 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
   try 
         {
 CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
-header ('Location: http://localhost/Blog/Blog/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'');
+header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'');
 }
         catch(PDOException $e)
         {

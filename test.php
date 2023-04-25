@@ -3,6 +3,7 @@ require 'header.php';
 require "fonction.php";
 $Users=getAllUtilisateur();
 $i=1;
+var_dump(getModerateur($_SESSION['email']));
 ?>
 <form action="" method="post">
   <div class="form-group">

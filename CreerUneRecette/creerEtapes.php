@@ -1,6 +1,6 @@
 <?php 
-require 'header.php';
-require "fonction.php";
+require "../fonction.php";
+require "../header.php";
 if (isset($_GET['id']))
 {
     $NombreEtape=$_GET['id'];

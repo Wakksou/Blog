@@ -1,6 +1,6 @@
 <?php 
-require 'header.php';
-require "fonction.php";
+require "../fonction.php";
+require "../header.php";
 if (isset($_GET['id']))
 {
 $NombreIngredients=$_GET['id'];
@@ -20,7 +20,7 @@ if ($check=true)
     $DescriptionRecette=$_POST['DescriptionRecette'];
     $image=$_POST['image'];
 
-    header ('Location: http://localhost/Blog/Blog/CreerEtapes.php?id='.$NombreEtape.'');
+    header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerEtapes.php?id='.$NombreEtape.'');
 }
 
 ?>
