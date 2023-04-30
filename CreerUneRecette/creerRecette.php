@@ -14,8 +14,10 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
   $NombreEtape=$_POST['NombreEtape'];
   try 
         {
-CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
-header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'');
+          CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
+          $recette_id=getIdRecette($NomRecette,$auteur);
+
+header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$recette_id);
 }
         catch(PDOException $e)
         {

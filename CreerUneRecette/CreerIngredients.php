@@ -1,28 +1,38 @@
 <?php 
 require "../fonction.php";
 require "../header.php";
-if (isset($_GET['id']))
+$ingredients=getAllIngredients();
+$i=1;
+$check=true;
+
+if (isset($_GET['id'])) //verifier qu'il a bien validé la page d'avant
 {
 $NombreIngredients=$_GET['id'];
 $NombreEtape=$_GET['Etapeid'];
+$id_recette=$_GET['recette_id'];
 }
 else header("Location: index.php");
-$check=true;
-for ($o=1;$o<=$NombreIngredients;$o++)
+
+for ($o=1;$o<=$NombreIngredients;$o++) //verifier qu'il a bien tout remplis
 {
-    if (empty ($_POST['Ingrédient'.$i.''])) 
-    $check=false;
+    if (empty ($_POST['ingredient'.$o])) 
+    {
+    $check=false; 
     break;
+    }
 }
-if ($check=true)
+
+if ($check==true)
 {
-    $NomRecette=$_POST['NomRecette'];
-    $DescriptionRecette=$_POST['DescriptionRecette'];
-    $image=$_POST['image'];
+  for ($o=1;$o<=$NombreIngredients;$o++)
+  {
+    echo "ingredient=".$id_ingredient=$_POST['ingredient'.$o]; // ca chope l'id
+    echo "quantites=".$quantite=$_POST['Quantites'.$o];
+    InsererQuantites($id_recette,$id_ingredient,$quantite);
+  }
 
-    header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerEtapes.php?id='.$NombreEtape.'');
+header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerEtapes.php?id='.$NombreEtape.'&recette_id='.$id_recette);
 }
-
 ?>
 
 <form action="" method="post">
@@ -31,17 +41,20 @@ if ($check=true)
     {
     ?>
         <div class="row">
-            <div class='col'>
-                <label for="exampleFormControlInput1">Ingrédient <?=$i?></label>
-                <input type="text" class="form-control" id="NomRecette" placeholder="patate" name="Ingredient<?=$i?>">
-            </div>
+        <div class='col'>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Ingrédient</label>
+        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name='ingredient<?=$i?>'>
+          <option selected>Choisir ingrédient</option>
+          <?php foreach ($ingredients as $ingredient)
+          { ?>
+          <option value="<?=$ingredient['id']?>"><?=$ingredient['nom']?></option>
+          <?php 
+          } ?>
+        </select>
+      </div>
             <div class='col'>
                 <label for="exampleFormControlInput1">Quantités</label>
                 <input type="text" class="form-control" id="NomRecette" placeholder="30g" name="Quantites<?=$i?>">
-            </div>
-            <div class='col'>
-                <label for="exampleFormControlInput1">Image</label>
-                <input type="text" class="form-control" id="NomRecette" placeholder="https://i.goopics.net/wez33h.jpg" name="Image<?=$i?>">
             </div>
         </div>
     </br>

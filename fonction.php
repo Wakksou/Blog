@@ -48,6 +48,19 @@ $requête ->bindParam(":image",$Image,PDO::PARAM_STR);
 $requête -> execute(); 
 }
 
+function getIdRecette(string $nom,$auteur) 
+{
+$database = connectiondb ();
+$request = "SELECT id FROM recette
+WHERE nom=:nom AND auteur=:auteur"; 
+$requête = $database->prepare($request);
+$requête -> bindParam(":nom",$nom,PDO::PARAM_STR);
+$requête -> bindParam(":auteur",$auteur,PDO::PARAM_STR);
+$requête -> execute();
+$result = $requête -> fetch();
+return $result['id'] ;
+}
+
 function getutilisateur(string $mail) 
 {
 $database = connectiondb ();
@@ -216,6 +229,29 @@ function getpseudo(string $mail)
                     $requête -> execute(); 
                     }
 
+                    function InsererQuantites($id_recette,$id_ingredient,$quantite)
+                    {
+                    $database = connectiondb ();
+                    $request = " INSERT INTO quantites (id_recette,id_ingredient,quantite) VALUES (:id_recette,:id_ingredient,:quantite) ";
+                    $requête = $database ->prepare($request);
+                    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_INT);
+                    $requête ->bindParam(":id_ingredient",$id_ingredient,PDO::PARAM_INT);
+                    $requête ->bindParam(":quantite",$quantite,PDO::PARAM_STR);
+                    $requête -> execute(); 
+                    }
+
+                    function InsererEtapes($nom,$description,$numero,$id_recette)
+                    {
+                    $database = connectiondb ();
+                    $request = " INSERT INTO etape (nom,description,numero,id_recette) VALUES (:nom,:description,:numero,:id_recette) ";
+                    $requête = $database ->prepare($request);
+                    $requête ->bindParam(":nom",$nom,PDO::PARAM_STR);
+                    $requête ->bindParam(":description",$description,PDO::PARAM_STR);
+                    $requête ->bindParam(":numero",$numero,PDO::PARAM_INT);
+                    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_INT);
+                    $requête -> execute(); 
+                    }
+
                     function getAllUtilisateur() 
                     {
                     $database = connectiondb ();
@@ -256,6 +292,16 @@ function getpseudo(string $mail)
                     $requête ->bindParam(":LastConnexion",$date,PDO::PARAM_STR);
                     $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
                     $requête -> execute(); 
+                    }
+
+                    function getAllIngredients() 
+                    {
+                    $database = connectiondb ();
+                    $request = "SELECT * FROM ingredient";
+                    $requête = $database->prepare($request);
+                    $requête -> execute();
+                    $result = $requête -> fetchAll();
+                    return $result ;
                     }
 ?>
 
