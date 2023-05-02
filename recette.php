@@ -1,6 +1,7 @@
 <?php 
 require 'header.php';
 require "fonction.php";
+$recettes=getRecettes();
 
 if (isset($_GET['id']))
 {
@@ -25,57 +26,57 @@ if (!empty ($_SESSION['email']) && !empty ($_POST['commentaire']))
     }
 
   }
-elseif (!isset($_SESSION['email']) && !empty ($_POST['commentaire']))
-    {
-      ?>
-      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded mr-2" alt="...">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        Hello, world! This is a toast message.
-      </div>
-    </div>
-    <?php
-    }
 ?>
+<br>
+<div class="container item-center">
+  <center>
+  <h4>spaguettis bolognaise</h4>
+  </center>
+  <center>
+  <img src='https://i.goopics.net/83r75t.jpg' alt=Image />
+  </center>
+  <center>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
+  <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
+  <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+  </svg> 
+  =40 min
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-egg" viewBox="0 0 16 16">
+  <path d="M8 15a5 5 0 0 1-5-5c0-1.956.69-4.286 1.742-6.12.524-.913 1.112-1.658 1.704-2.164C7.044 1.206 7.572 1 8 1c.428 0 .956.206 1.554.716.592.506 1.18 1.251 1.704 2.164C12.31 5.714 13 8.044 13 10a5 5 0 0 1-5 5zm0 1a6 6 0 0 0 6-6c0-4.314-3-10-6-10S2 5.686 2 10a6 6 0 0 0 6 6z"/>
+</svg>
+=9 aliments
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+</svg>
+=lulustu
+</center>
+</div>
 
 <DOCTYPE html>
 <html>
-
+<head>
 <br>
+</br>
+<br>
+</br>
 <h4>Ingrédients</h4>
-</br>
-</br>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Nombre de personne
-  </button>  
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">1</a>
-    <a class="dropdown-item" href="#">2</a>
-    <a class="dropdown-item" href="#">3</a>
-    <a class="dropdown-item" href="#">4</a>
-  </div>
-</div>
+
+
+</head>
 
 </br>
 </br>
-
 <?php 
 $ingredients=getIngredient($recette_id);
 $etapes=getEtape($recette_id);
 ?>
+
 <div class="container">
   <div class="row">
-    <div class="card ">
-      <div class="card-body">
+
+    <div class="card "> 
+      <div class="card-body p-3 mb-2 bg-light text-dark">
         <?php 
         foreach ($ingredients as $ingredient) 
         {
@@ -158,8 +159,10 @@ $etapes=getEtape($recette_id);
                 <p><h6><?= $commentaire['commentaire'] ?></h5></p>
                 <footer class="blockquote-footer"><?= $commentaire['date'] ?></cite></footer>
                 <?php
+                if (!empty ($_SESSION['email']) ){
                 if ($_SESSION['email']=='maxime.dingival@hotmail.com'||$_SESSION['Pseudo']==$commentaire['auteur'])
-                { ?>
+                { 
+                }?>
                   <a href='http://localhost/Blog/Blog/supprimerCom.php?id=<?=$commentaire['id']?>&recette_id=<?=$recette_id?>'>
                   <button type="button" class="btn btn-outline-secondary">Supprimer</button>
                   </a>

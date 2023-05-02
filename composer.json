@@ -1,0 +1,17 @@
+{
+    "name": "draiv/blog",
+    "autoload": {
+        "psr-4": {
+            "Draiv\\Blog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Max",
+            "email": "max94220@hotmail.fr"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

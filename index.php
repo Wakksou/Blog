@@ -5,7 +5,6 @@ $recettes=getRecettes();
 ?>
 <DOCTYPE html>
 <html>
-
 <div class='row'>
   <?php
   foreach($recettes as $recette)
@@ -43,3 +42,4 @@ $recettes=getRecettes();
   }
   ?>
 </div>
+</html>

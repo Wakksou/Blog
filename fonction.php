@@ -184,6 +184,7 @@ function getpseudo(string $mail)
                 return $result;    
                 }
 
+
                 function getQuantites($id)
                 {
                 $database = connectiondb();
@@ -298,6 +299,16 @@ function getpseudo(string $mail)
                     {
                     $database = connectiondb ();
                     $request = "SELECT * FROM ingredient";
+                    $requête = $database->prepare($request);
+                    $requête -> execute();
+                    $result = $requête -> fetchAll();
+                    return $result ;
+                    }
+
+                    function Recherche($recherche) 
+                    {
+                    $database = connectiondb ();
+                    $request = "SELECT * FROM recette WHERE nom Like '%$recherche%'";
                     $requête = $database->prepare($request);
                     $requête -> execute();
                     $result = $requête -> fetchAll();
