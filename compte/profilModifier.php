@@ -1,6 +1,11 @@
 <?php
 require "../fonction.php";
 require "../header.php";
+if (isset($_GET['id']))
+{
+$user_id=$_GET['id'];
+}
+else header("Location: index.php");
 
 if (!empty ( $_POST['password'])) 
 {

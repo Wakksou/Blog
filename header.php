@@ -1,4 +1,18 @@
-<?php session_start(); ?> 
+<?php session_start();
+if (!empty ($_POST['recherche']))
+{
+$recherche=$_POST['recherche'];
+
+try 
+{
+header ('Location: http://localhost/Blog/Blog/recherche.php.?id='.$recherche);
+}
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+}
+?> 
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,14 +35,32 @@
         <a class="nav-link" href="http://localhost/Blog/Blog/index.php">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="">Créer une recette <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://localhost/Blog/Blog/CreerUneRecette/creerRecette.php">Créer une recette <span class="sr-only">(current)</span></a>
       </li>
-      
+  <form action="" method="post" class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputPassword2" class="sr-only">Password</label>
+      <input type="text" class="form-control" id="inputPassword2" placeholder="Recherche" name='recherche'>
+    </div>
+  <button type="submit" class="btn btn-secondary mb-2">Chercher</button>
+  </form>
+  <li class="nav-item ">
+        <a class="nav-link" href="http://localhost/Blog/Blog/contact_us.php">Contactez-nous <span class="sr-only">(current)</span></a>
+      </li>
           <?php if (!empty ($_SESSION['email']) ){ ?>
             <li class="nav-item ">
             <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Vous êtes connecté en tant que <?= $_SESSION['Pseudo'] ?> " href="http://localhost/Blog/Blog/compte/profil.php">Profil<span class="sr-only">(current)</span></a>
             </li>
             <?php
+            }
+          ?>
+          <?php if (!empty ($_SESSION['email']) ){
+          if ($_SESSION['email']=="maxime.dingival@hotmail.com") { ?>
+            <li class="nav-item ">
+            <a class="nav-link" href="http://localhost/Blog/Blog/dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
+            </li>
+            <?php
+            }
             }
           ?>
     </ul> 
