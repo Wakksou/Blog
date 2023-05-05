@@ -1,50 +1,22 @@
-<?php 
-require 'header.php';
-require "fonction.php";
-require_once 'vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
+<?php
+require_once 'Mail.php';
+require '../header.php';
+require "../fonction.php";
 
 if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['subject']) && !empty ( $_POST['message']))
 {
-    $Name=$_POST['NomRecette'];
-    $Email=$_POST['DescriptionRecette'];
-    $Sujet=$_POST['image'];
-    $Message=$_SESSION['Pseudo'];
-    try 
-          {
-            $mail = new PHPMailer();
-$mail->isSMTP();
-$mail->Host = 'smtp.mailtrap.io';
-$mail->SMTPAuth = true;
-$mail->Username = 'eb0406e1e17aba';
-$mail->Password = '768b72c8f07a0d';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-$mail->Port = 2525;
-$mail->setFrom($Email);
-$mail->addAddress('Millepate_staff');
-$mail->Subject = $Sujet;
-$mail->isHTML(TRUE);
-$mail->Body = $Name.$Message;
-$mail->AltBody = $Name.$Message;
-$attachmentPath = './confirmations/yourbooking.pdf';
-            if (file_exists($attachmentPath)) {
-                $mail->addAttachment($attachmentPath, 'yourbooking.pdf');
+    $Name=$_POST['name'];
+    $Email=$_POST['email'];
+    $Sujet=$_POST['subject'];
+    $Message=$_POST['message'];
+
+                $mail= new Mail();
+                if($mail->sendContactUs($Email,'MillePateStaff@gmail.com', $Name))
+                {
+                    echo 'message sent';
             }
-            if(!$mail->send()){
-                echo 'Message could not be sent.';
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-                header ('Location: http://localhost/Blog/Blog/contact_us.php');
-            } else {
-                echo 'Message has been sent';
-                header ('Location: http://localhost/Blog/Blog/index.php');
-            }
-  }
-          catch(PDOException $e)
-          {
-              echo $e->getMessage();
-          }
-  }
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -57,7 +29,7 @@ $attachmentPath = './confirmations/yourbooking.pdf';
     <div class="container">
 
         <div class="item-center col-md-16 ">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+            <form id="contact-form" name="contact-form" action="" method="POST">
 
                 <div class="row">
 

@@ -45,7 +45,7 @@ header ('Location: http://localhost/Blog/Blog/recherche.php.?id='.$recherche);
   <button type="submit" class="btn btn-secondary mb-2">Chercher</button>
   </form>
   <li class="nav-item ">
-        <a class="nav-link" href="http://localhost/Blog/Blog/contact_us.php">Contactez-nous <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://localhost/Blog/Blog/classes/contact_us.php">Contactez-nous <span class="sr-only">(current)</span></a>
       </li>
           <?php if (!empty ($_SESSION['email']) ){ ?>
             <li class="nav-item ">
