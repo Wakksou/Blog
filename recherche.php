@@ -4,13 +4,46 @@ require 'fonction.php';
 $recettes=getRecettes();
 if (isset($_GET['id'])) //verifier qu'il a bien validé la page d'avant
 {
-$recherche=$_GET['id'];
-$Recherches=Recherche($recherche);
+$rechercheNom=$_GET['id'];
+$Recherches=RechercheNom($rechercheNom);
 }
 else header("Location: index.php");
+if (!empty ($_POST['recherchee'])&& !empty($_POST['filtre']))
+{
+if ($_POST['filtre']==1)
+{
+  $recherches=$_POST['recherchee'];
+  $Recherches=RechercheAuteur($recherches);
+}
+if ($_POST['filtre']==2)
+{
+  $recherches=$_POST['recherchee'];
+  $Recherches=RechercheNom($recherches);
+}
+}
 ?>
 <DOCTYPE html>
 <html>
+  <br>
+
+<form action="" method="post" class="form-inline">
+
+    <div class="form-group mx-sm-3 mb-2">
+<div class="row">
+          <div class='col'>
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name='filtre'>
+              <option selected>Filtre</option>
+              <option value='1'>Auteur</option>
+              <option value='2'>Nom de la recette</option>
+            </select>
+          </div>
+        </div>
+      <label for="inputPassword2" class="sr-only"></label>
+      <input type="text" class="form-control" id="inputPassword2" placeholder="Recherche" name='recherchee'>
+    </div>
+  <button type="submit" class="btn btn-secondary mb-2">Chercher</button>
+  </form>
 
 <div class='row'>
   <?php

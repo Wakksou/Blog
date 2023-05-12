@@ -159,7 +159,8 @@ $etapes=getEtape($recette_id);
                 <p><h6><?= $commentaire['commentaire'] ?></h5></p>
                 <footer class="blockquote-footer"><?= $commentaire['date'] ?></cite></footer>
                 <?php
-                if (!empty ($_SESSION['email']) ){
+                if (!empty ($_SESSION['email']) )
+                {
                 if ($_SESSION['email']=='maxime.dingival@hotmail.com'||$_SESSION['Pseudo']==$commentaire['auteur'])
                 { 
                 }?>
