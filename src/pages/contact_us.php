@@ -1,7 +1,9 @@
 <?php
-require_once 'Mail.php';
-require '../header.php';
-require "../fonction.php";
+
+use App\classes\Mail;
+require_once '../../vendor/autoload.php';
+require '../../header.php';
+require "../../fonction.php";
 
 if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['subject']) && !empty ( $_POST['message']))
 {

@@ -44,5 +44,8 @@ header ('Location: http://localhost/Blog/Blog/index.php');
   <?php 
     }
     ?>
-    <input type="submit" value="Suivant">
+  <input type="submit" value="Suivant">
+  <a href=''>
+    <button type="button" class="btn btn-outline-secondary">Annuler</button>
+  </a>
 </form>

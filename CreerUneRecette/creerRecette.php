@@ -3,7 +3,7 @@
 require "../fonction.php";
 require "../header.php";
 if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !empty ( $_POST['temps']) && !empty ($_POST['NombreIngredients'])
-&& !empty ($_POST['NombreEtape'])) 
+&& !empty ($_POST['NombreEtape'])&& !empty ($_SESSION['email'])) 
 {
   $NomRecette=$_POST['NomRecette'];
   $DescriptionRecette=$_POST['DescriptionRecette'];
@@ -67,4 +67,7 @@ header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.p
     </select>
   </div>
   <input type="submit" value="Suivant">
+  <a href=''>
+  <button type="button" class="btn btn-outline-secondary">Annuler</button>
+</a>
 </form>

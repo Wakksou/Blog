@@ -2,7 +2,7 @@
     "name": "draiv/blog",
     "autoload": {
         "psr-4": {
-            "Draiv\\Blog\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [

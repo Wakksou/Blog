@@ -1,9 +1,11 @@
 <?php
+namespace App\classes;
+use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
-require_once '../vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 
 ///Chargement des variables d'environnement 
-$dotenv = Dotenv\Dotenv::createImmutable("../");
+$dotenv = Dotenv::createImmutable("../../");
 $dotenv->safeLoad();
 class Mail 
 {

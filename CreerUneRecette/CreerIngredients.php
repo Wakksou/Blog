@@ -41,25 +41,28 @@ header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerEtapes.php?id
     {
     ?>
         <div class="row">
-        <div class='col'>
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Ingrédient</label>
-        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name='ingredient<?=$i?>'>
-          <option selected>Choisir ingrédient</option>
-          <?php foreach ($ingredients as $ingredient)
-          { ?>
-          <option value="<?=$ingredient['id']?>"><?=$ingredient['nom']?></option>
-          <?php 
-          } ?>
-        </select>
-      </div>
-            <div class='col'>
-                <label for="exampleFormControlInput1">Quantités</label>
-                <input type="text" class="form-control" id="NomRecette" placeholder="30g" name="Quantites<?=$i?>">
-            </div>
+          <div class='col'>
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Ingrédient</label>
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name='ingredient<?=$i?>'>
+              <option selected>Choisir ingrédient</option>
+              <?php foreach ($ingredients as $ingredient)
+              { ?>
+              <option value="<?=$ingredient['id']?>"><?=$ingredient['nom']?></option>
+              <?php 
+              } ?>
+            </select>
+          </div>
+          <div class='col'>
+            <label for="exampleFormControlInput1">Quantités</label>
+            <input type="text" class="form-control" id="NomRecette" placeholder="30g" name="Quantites<?=$i?>">
+          </div>
         </div>
     </br>
     <?php
     }
     ?>
-    <input type="submit" value="Suivant">
+  <input type="submit" value="Suivant">
+  <a href=''>
+    <button type="button" class="btn btn-outline-secondary">Annuler</button>
+  </a>
 </form>

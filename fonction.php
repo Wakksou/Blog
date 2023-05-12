@@ -283,6 +283,26 @@ function getpseudo(string $mail)
                         $requête -> execute();
                     }
 
+                    function deleteRecette($id)
+                    {
+                        $database = connectiondb ();
+                        $request = "DELETE FROM recette
+                        WHERE id = :id";
+                        $requête = $database->prepare($request);
+                        $requête ->bindParam(":id",$id,PDO::PARAM_INT);
+                        $requête -> execute();
+                    }
+
+                    function deleteQuantites($id)
+                    {
+                        $database = connectiondb ();
+                        $request = "DELETE FROM quantites
+                        WHERE id_recette = :id_recette";
+                        $requête = $database->prepare($request);
+                        $requête ->bindParam(":id",$id,PDO::PARAM_INT);
+                        $requête -> execute();
+                    }
+
                     function LastConnexion($date,$mail)
                     {
                     $database = connectiondb ();
@@ -305,10 +325,20 @@ function getpseudo(string $mail)
                     return $result ;
                     }
 
-                    function Recherche($recherche) 
+                    function RechercheNom($rechercheNom) 
                     {
                     $database = connectiondb ();
-                    $request = "SELECT * FROM recette WHERE nom Like '%$recherche%'";
+                    $request = "SELECT * FROM recette WHERE nom Like '%$rechercheNom%'";
+                    $requête = $database->prepare($request);
+                    $requête -> execute();
+                    $result = $requête -> fetchAll();
+                    return $result ;
+                    }
+
+                    function RechercheAuteur($recherche) 
+                    {
+                    $database = connectiondb ();
+                    $request = "SELECT * FROM recette WHERE auteur Like '%$recherche%'";
                     $requête = $database->prepare($request);
                     $requête -> execute();
                     $result = $requête -> fetchAll();
