@@ -43,3 +43,4 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) )
         </div>      
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+<html> 

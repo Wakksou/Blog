@@ -13,18 +13,16 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
   $NombreIngredients=$_POST['NombreIngredients'];
   $NombreEtape=$_POST['NombreEtape'];
   try 
-        {
-          CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
-          $recette_id=getIdRecette($NomRecette,$auteur);
-
-header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$recette_id);
+  {
+    CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
+    $id_recette=getIdRecette($NomRecette,$auteur);
+    header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
+  }
+  catch(PDOException $e)
+  {
+    echo $e->getMessage();
+  }
 }
-        catch(PDOException $e)
-        {
-            echo $e->getMessage();
-        }
-}
-
 ?>
 </br>
 <form action="" method="post">
@@ -67,7 +65,7 @@ header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.p
     </select>
   </div>
   <input type="submit" value="Suivant">
-  <a href=''>
+  <a href='http://localhost/Blog/Blog/index.php'>
   <button type="button" class="btn btn-outline-secondary">Annuler</button>
-</a>
+  </a>
 </form>

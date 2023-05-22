@@ -28,8 +28,8 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
 }
 ?>
 
-    <DOCTYPE html>
-    <html>
+<DOCTYPE html>
+<html>
     <body>
         <form action="" method="post">
             <div class="mb-3">
@@ -56,8 +56,8 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
             
             <input type="submit" value="M'inscrire">
         </form>
-        </body>
-        </html>
+    </body>
+</html>
 
 
 
