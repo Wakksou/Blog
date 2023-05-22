@@ -2,6 +2,12 @@
 require "../fonction.php";
 require "../header.php";
 
+if (isset($_GET['id'])&& isset($_GET['Get']))
+{
+    $recette_id=$_GET['id'];
+    $Get=$_GET['Get'];
+}
+
 if (!empty ($_POST['email']) && !empty ( $_POST['password']) ) 
 {
     $options = [
@@ -20,7 +26,14 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) )
         $date=date("Y-m-d H:i:s");
         $_SESSION['Moderateur']=getModerateur($_SESSION['email']);
         LastConnexion($date,$mail);
-        header('Location: http://localhost/Blog/Blog/index.php');
+        if (isset($_GET['id']))
+        {
+            header('Location: http://localhost/Blog/Blog/recette.php?id='.$recette_id.'&Get='.$Get);
+        }
+        else 
+        {
+            header('Location: http://localhost/Blog/Blog/index.php');
+        }
     }
     else 
     {
@@ -31,7 +44,7 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) )
 ?>
 <DOCTYPE html>
 <html> 
-    <form action="connexion.php" method="post">
+    <form action="" method="post">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Votre adresse mail</label>
             <input placeholder= 'email@mail.com' name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

@@ -9,21 +9,71 @@ if (isset($_GET['id']))
 }
 else header("Location: index.php");
 
-if (!empty ($_SESSION['email']) && !empty ($_POST['commentaire']))
-{ 
-  $commentaire=$_POST['commentaire'];
+if (isset($_GET['Get']))
+{
+  $commentaire=$_COOKIE['Commentaire'];
   $date=date("Y-m-d H:i:s");
   $auteur=$_SESSION['Pseudo'];
 
   try 
-  {
-    posterCom($commentaire,$date,$auteur,$recette_id);
-  }
+      {
+        posterCom($commentaire,$date,$auteur,$recette_id);
+      }
 
-  catch(PDOException $e)
-  {
-    echo $e->getMessage();
-  }
+      catch(PDOException $e)
+      {
+        echo $e->getMessage();
+      }
+      ?>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Merci!</h4>
+        <p>Votre commentaire a bien été posté.</p>
+      </div>
+      <?php
+}
+
+if (!empty ($_POST['commentaire']))
+{ 
+  if (!empty ($_SESSION['email']))
+    {
+      $commentaire=$_POST['commentaire'];
+      $date=date("Y-m-d H:i:s");
+      $auteur=$_SESSION['Pseudo'];
+
+      try 
+      {
+        posterCom($commentaire,$date,$auteur,$recette_id);
+      }
+
+      catch(PDOException $e)
+      {
+        echo $e->getMessage();
+      }
+      ?>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Merci!</h4>
+        <p>Votre commentaire a bien été posté.</p>
+      </div>
+      <?php
+    }
+    else 
+    {
+      setcookie('Commentaire',$_POST['commentaire'])
+    ?>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Attention!</h4>
+        <p>Vous devez être connecté pour mettre un commentaire vous pouvez vous connecter un en cliquant juste en dessous.</p>
+        <a href='http://localhost/Blog/Blog/compte/connexion.php?id=<?=$recette_id?>&Get=1'>
+        <button type="button" class="btn btn-link">Se connecter</button>
+        </a>
+        <hr>
+        <p class="mb-0">Si vous n'avez pas de compte .</p>
+        <a href='http://localhost/Blog/Blog/compte/inscription.php'>
+        <button type="button" class="btn btn-link">S'inscrire</button>
+        </a>
+      </div>
+    <?php
+    }
 }
 $Recettes=(getRecette($recette_id));
 foreach ($Recettes as $Recette) 
@@ -153,21 +203,21 @@ foreach ($Recettes as $Recette)
               </div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                <p><h6><?= $commentaire['commentaire'] ?></h5></p>
-                <footer class="blockquote-footer"><?= $commentaire['date'] ?></cite></footer>
-                <?php
-                if (!empty ($_SESSION['email']) )
-                {
-                  if ($_SESSION['email']=='maxime.dingival@hotmail.com'||$_SESSION['Pseudo']==$commentaire['auteur'])
-                  { 
-                  ?>
-                    <a href='http://localhost/Blog/Blog/supprimerCom.php?id=<?=$commentaire['id']?>&recette_id=<?=$recette_id?>'>
-                      <button type="button" class="btn btn-outline-secondary">Supprimer</button>
-                    </a>
+                  <p><h6><?= $commentaire['commentaire'] ?></h5></p>
+                  <footer class="blockquote-footer"><?= $commentaire['date'] ?></cite></footer>
                   <?php
+                  if (!empty ($_SESSION['email']) )
+                  {
+                    if ($_SESSION['email']=='maxime.dingival@hotmail.com'||$_SESSION['Pseudo']==$commentaire['auteur'])
+                    { 
+                    ?>
+                      <a href='http://localhost/Blog/Blog/supprimerCom.php?id=<?=$commentaire['id']?>&recette_id=<?=$recette_id?>'>
+                        <button type="button" class="btn btn-outline-secondary">Supprimer</button>
+                      </a>
+                    <?php
+                    }
                   }
-                }
-                ?>
+                  ?>
                 </blockquote>
               </div>
             </div>

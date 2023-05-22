@@ -2,27 +2,43 @@
 <?php 
 require "../fonction.php";
 require "../header.php";
-if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !empty ( $_POST['temps']) && !empty ($_POST['NombreIngredients'])
-&& !empty ($_POST['NombreEtape'])&& !empty ($_SESSION['email'])) 
-{
-  $NomRecette=$_POST['NomRecette'];
-  $DescriptionRecette=$_POST['DescriptionRecette'];
-  $image=$_POST['image'];
-  $auteur=$_SESSION['Pseudo'];
-  $temps=$_POST['temps'];
-  $NombreIngredients=$_POST['NombreIngredients'];
-  $NombreEtape=$_POST['NombreEtape'];
-  try 
+
+
+  if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !empty ( $_POST['temps']) && !empty ($_POST['NombreIngredients'])
+  && !empty ($_POST['NombreEtape'])) 
   {
-    CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
-    $id_recette=getIdRecette($NomRecette,$auteur);
-    header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
+    if (!empty ($_SESSION['email']))
+    {
+      $NomRecette=$_POST['NomRecette'];
+      $DescriptionRecette=$_POST['DescriptionRecette'];
+      $image=$_POST['image'];
+      $auteur=$_SESSION['Pseudo'];
+      $temps=$_POST['temps'];
+      $NombreIngredients=$_POST['NombreIngredients'];
+      $NombreEtape=$_POST['NombreEtape'];
+      try 
+      {
+        CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
+        $id_recette=getIdRecette($NomRecette,$auteur);
+        header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
+      }
+      catch(PDOException $e)
+      {
+        echo $e->getMessage();
+      }
+    }
+    else 
+    {
+    ?>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Attention!</h4>
+        <p>Vous devez être connecté pour créer une recette.</p>
+        <hr>
+        <p class="mb-0">Si vous n'avez pas de compte vous pouvez en créer un en cliquant ici.</p>
+      </div>
+    <?php
+    }
   }
-  catch(PDOException $e)
-  {
-    echo $e->getMessage();
-  }
-}
 ?>
 </br>
 <form action="" method="post">
@@ -65,7 +81,4 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
     </select>
   </div>
   <input type="submit" value="Suivant">
-  <a href='http://localhost/Blog/Blog/index.php'>
-  <button type="button" class="btn btn-outline-secondary">Annuler</button>
-  </a>
 </form>
