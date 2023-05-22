@@ -68,7 +68,7 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
 ?>
 
 <DOCTYPE html>
-    <html>
+<html>
     <body>
         <form action="" method="post">
             <div class="mb-3">
@@ -130,5 +130,5 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
             ?>           
             <input type="submit" value="Modifier">
         </form>
-        </body>
-        </html>
+    </body>
+</html>
