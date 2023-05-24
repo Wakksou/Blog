@@ -27,9 +27,9 @@ if ($check==true)
     $description=$_POST['Etape'.$o]; // ca chope l'id
     $nom='Etape'.$o;
     $numero=$o;
-    InsererEtapes($nom,$description,$numero,$id_recette);
+    insererEtapes($nom,$description,$numero,$id_recette);
   }
-  header ('Location: http://localhost/Blog/Blog/index.php');
+  header ('Location: http://localhost/Blog/Blog/src/pages/index.php');
 }
 ?>
 <form action="" method="post">

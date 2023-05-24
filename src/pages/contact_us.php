@@ -24,7 +24,7 @@ if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['sub
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>TheEvent Bootstrap Template - Index</title>
+    <title>Contactez-nous</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -65,14 +65,14 @@ if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['sub
             <div class="contact-address">
               <i class="bi bi-geo-alt"></i>
               <h3>Adresse</h3>
-              <address>A108 Adam Street, NY 535022, USA</address>
+              <address>11 rue Jean Pigeon 94220</address>
             </div>
           </div>
           <div class="col-md-4">
             <div class="contact-phone">
               <i class="bi bi-phone"></i>
               <h3>Numero</h3>
-              <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+              <p><a href="tel:+155895548855">+06 78 91 01 11</a></p>
             </div>
           </div>
           <div class="col-md-4">
@@ -85,7 +85,7 @@ if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['sub
         </div>
 
         <div class="form">
-          <form action="test.php" method="post" role="form" class="php-email-form">
+          <form action="" method="post" role="form" class="php-email-form">
             <div class="row">
               <div class="form-group col-md-6">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Votre nom" required>
@@ -101,9 +101,9 @@ if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['sub
               <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
             </div>
             <div class="my-3">
-              <div class="loading">Loading</div>
+              <div class="loading">Chargement</div>
               <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              <div class="sent-message">Votre message a bien été envoyé. Merci!</div>
             </div>
             <div class="text-center"><button type="submit">Envoyer</button></div>
           </form>

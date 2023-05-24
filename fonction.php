@@ -27,7 +27,7 @@ function inscription($mail,$pseudo,$ville,$mdp,$age)
     $requête -> execute(); 
 }
 
-function CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps)
+function creerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps)
 {
     $database = connectiondb ();
     $request = " INSERT INTO recette (nom,description,image,auteur,temps) VALUES (:nom,:description,:image,:auteur,:temps) ";
@@ -40,7 +40,7 @@ function CreerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps)
     $requête -> execute(); 
 }
 
-function CreerIngredients($ingredient,$Image)
+function creerIngredients($ingredient,$Image)
 {
     $database = connectiondb ();
     $request = " INSERT INTO ingredient (nom,image) VALUES (:nom,:image) ";
@@ -245,7 +245,7 @@ function posterCom($commentaire,$date,$auteur,$id_recette)
     $requête -> execute(); 
 }
 
-function InsererQuantites($id_recette,$id_ingredient,$quantite)
+function insererQuantites($id_recette,$id_ingredient,$quantite)
 {
     $database = connectiondb ();
     $request = " INSERT INTO quantites (id_recette,id_ingredient,quantite) VALUES (:id_recette,:id_ingredient,:quantite) ";
@@ -256,7 +256,7 @@ function InsererQuantites($id_recette,$id_ingredient,$quantite)
     $requête -> execute(); 
 }
 
-function InsererEtapes($nom,$description,$numero,$id_recette)
+function insererEtapes($nom,$description,$numero,$id_recette)
 {
     $database = connectiondb ();
     $request = " INSERT INTO etape (nom,description,numero,id_recette) VALUES (:nom,:description,:numero,:id_recette) ";
@@ -318,7 +318,7 @@ function deleteQuantites($id_recette)
     $requête -> execute();
 }
 
-function LastConnexion($date,$mail)
+function lastConnexion($date,$mail)
 {
     $database = connectiondb ();
     $request = " UPDATE comptes 
@@ -340,7 +340,7 @@ function getAllIngredients()
     return $result ;
 }
 
-function RechercheNom($rechercheNom) 
+function rechercheNom($rechercheNom) 
 {
     $database = connectiondb ();
     $request = "SELECT * FROM recette WHERE nom Like '%$rechercheNom%'";
@@ -350,7 +350,7 @@ function RechercheNom($rechercheNom)
     return $result ;
 }
 
-function RechercheAuteur($recherche) 
+function rechercheAuteur($recherche) 
 {
     $database = connectiondb ();
     $request = "SELECT * FROM recette WHERE auteur Like '%$recherche%'";

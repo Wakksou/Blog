@@ -1,11 +1,7 @@
 <?php
 require "../fonction.php";
 require "../header.php";
-if (isset($_GET['id']))
-{
-$user_id=$_GET['id'];
-}
-else header("Location: index.php");
+
 
 if (!empty ( $_POST['password'])) 
 {
@@ -16,7 +12,7 @@ if (!empty ( $_POST['password']))
         $pseudo=$_POST['pseudo'];
         $ville=$_POST['ville'];
         $age=$_POST['age'];
-        $mail=$_SESSION['email'];
+        $mail=$_POST['email'];
 
         try 
             {
@@ -26,6 +22,7 @@ if (!empty ( $_POST['password']))
             {
                 echo $e->getMessage();
             }
+            header("Location: http://localhost/Blog/Blog/compte/profil.php?id=1");
     }
     else 
     {

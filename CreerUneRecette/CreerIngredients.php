@@ -28,7 +28,7 @@ if ($check==true)
   {
     echo "ingredient=".$id_ingredient=$_POST['ingredient'.$o]; // ca chope l'id
     echo "quantites=".$quantite=$_POST['Quantites'.$o];
-    InsererQuantites($id_recette,$id_ingredient,$quantite);
+    insererQuantites($id_recette,$id_ingredient,$quantite);
   }
 
 header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerEtapes.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);

@@ -25,14 +25,14 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) )
         $_SESSION['Age']= getage($mail);
         $date=date("Y-m-d H:i:s");
         $_SESSION['Moderateur']=getModerateur($_SESSION['email']);
-        LastConnexion($date,$mail);
+        lastConnexion($date,$mail);
         if (isset($_GET['id']))
         {
             header('Location: http://localhost/Blog/Blog/recette.php?id='.$recette_id.'&Get='.$Get);
         }
         else 
         {
-            header('Location: http://localhost/Blog/Blog/index.php');
+            header('Location: http://localhost/Blog/Blog/src/pages/index.php');
         }
     }
     else 

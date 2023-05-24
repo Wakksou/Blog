@@ -12,7 +12,7 @@ if (isset($_GET['id']))
         echo $e->getMessage();
     }
 }
-header('Location: http://localhost/Blog/Blog/dashboard.php');
+header('Location: http://localhost/Blog/Blog/src/pages/dashboard.php');
 exit();
 
 ?>

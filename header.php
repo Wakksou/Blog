@@ -4,7 +4,7 @@ if (!empty ($_POST['recherche']))
   $recherche=$_POST['recherche'];
   try 
   {
-    header ('Location: http://localhost/Blog/Blog/recherche.php.?id='.$recherche);
+    header ('Location: http://localhost/Blog/Blog/src/pages/recherche.php.?id='.$recherche);
   }
   catch(PDOException $e)
   {
@@ -30,7 +30,7 @@ if (!empty ($_POST['recherche']))
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-              <a class="nav-link" href="http://localhost/Blog/Blog/index.php">Accueil <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="http://localhost/Blog/Blog/src/pages/index.php">Accueil <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="http://localhost/Blog/Blog/CreerUneRecette/creerRecette.php">Créer une recette <span class="sr-only">(current)</span></a>
@@ -62,7 +62,7 @@ if (!empty ($_POST['recherche']))
               {
               ?>
                 <li class="nav-item ">
-                  <a class="nav-link" href="http://localhost/Blog/Blog/dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="http://localhost/Blog/Blog/src/pages/dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
               <?php
               }
