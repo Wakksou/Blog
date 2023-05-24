@@ -3,32 +3,38 @@ require "../fonction.php";
 require "../header.php";
 
 
-if (!empty ( $_POST['password'])) 
+if (!empty ( $_POST['password']) )
 {
-    if (password_verify($_POST['password'],getmdp($_POST['email'])) )
+    if( !empty ($_POST['pseudo']) && !empty ($_POST['email']) && !empty ($_POST['ville']) && !empty ($_POST['age']))
     {
+        if (password_verify($_POST['password'],getmdp($_POST['email'])))
+        {
 
-        $newmail=$_POST['email'];
-        $pseudo=$_POST['pseudo'];
-        $ville=$_POST['ville'];
-        $age=$_POST['age'];
-        $mail=$_POST['email'];
+            $newmail=$_POST['email'];
+            $pseudo=$_POST['pseudo'];
+            $ville=$_POST['ville'];
+            $age=$_POST['age'];
+            $mail=$_POST['email'];
 
-        try 
-            {
-        modifierProfil($newmail,$pseudo,$ville,$age,$mail);
+            try 
+                {
+            modifierProfil($newmail,$pseudo,$ville,$age,$mail);
+        }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+                header("Location: http://localhost/Blog/Blog/compte/profil.php?id=1");
+        }
+        else 
+        {
+            echo 'Mot de passe erroné';
+        }
     }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
-            header("Location: http://localhost/Blog/Blog/compte/profil.php?id=1");
-    }
-    else 
-    {
-        echo 'mot de passe erroné';
-    }
+    else echo ' Veuillez remplir tous les champs'; 
 }
+
+
 
 if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword'])) 
 {

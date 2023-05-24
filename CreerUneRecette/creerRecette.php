@@ -74,7 +74,7 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
         </div>
 
         <div class="form">
-          <form action="../tests.php" method="post" role="form" class="php-email-form">
+          <form action="" method="post" role="form" class="php-email-form">
             <div class="row">
               <div class="form-group col-md-6">
                 <input type="text" name="NomRecette" class="form-control" id="name" placeholder="Nom de la recette" required>
