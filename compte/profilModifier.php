@@ -1,37 +1,40 @@
 <?php
-require "../fonction.php";
 require "../header.php";
-if (isset($_GET['id']))
+require "../fonctions/fonctionUser.php";
+
+
+if (!empty ( $_POST['password']) )
 {
-$user_id=$_GET['id'];
-}
-else header("Location: index.php");
-
-if (!empty ( $_POST['password'])) 
-{
-    if (password_verify($_POST['password'],getmdp($_POST['email'])) )
+    if( !empty ($_POST['pseudo']) && !empty ($_POST['email']) && !empty ($_POST['ville']) && !empty ($_POST['age']))
     {
+        if (password_verify($_POST['password'],getmdp($_POST['email'])))
+        {
 
-        $newmail=$_POST['email'];
-        $pseudo=$_POST['pseudo'];
-        $ville=$_POST['ville'];
-        $age=$_POST['age'];
-        $mail=$_SESSION['email'];
+            $newmail=$_POST['email'];
+            $pseudo=$_POST['pseudo'];
+            $ville=$_POST['ville'];
+            $age=$_POST['age'];
+            $mail=$_POST['email'];
 
-        try 
-            {
-        modifierProfil($newmail,$pseudo,$ville,$age,$mail);
+            try 
+                {
+            modifierProfil($newmail,$pseudo,$ville,$age,$mail);
+        }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+                header("Location: http://localhost/Blog/Blog/compte/profil.php?id=1");
+        }
+        else 
+        {
+            echo 'Mot de passe erroné';
+        }
     }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
-    }
-    else 
-    {
-        echo 'mot de passe erroné';
-    }
+    else echo ' Veuillez remplir tous les champs'; 
 }
+
+
 
 if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword'])) 
 {
@@ -42,7 +45,6 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
 
     if (password_verify($_POST['oldpassword'],getmdp($_SESSION['email'])) )
     {
-
         $newmdp=$_POST['newpassword'];
         $mail=$_SESSION['email'];
 
@@ -52,13 +54,13 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
         $NewpasswordHashe=password_hash($newmdp, PASSWORD_BCRYPT, $options);
 
         try 
-            {
-        modifierMdp($NewpasswordHashe,$mail);
-    }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
+        {
+            modifierMdp($NewpasswordHashe,$mail);
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
     }
     else 
     {
@@ -93,30 +95,29 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
             <div class="input-group mb-3">
                 <label for="exampleInputPassword1" class="form-label"></label>
                 <input placeholder= 'MoTdEPAssE9!72?' name = "password" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
-                
+
                 <p>
-                <button class="btn btn-outline-secondary" type="button"data-toggle="collapse" data-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Modifier mot de passe</button>
-                <div style="min-height: 120px;">
-                    <div class="collapse width" id="collapseWidthExample">
-                        <div class="card card-body" style="width: 320px;">
-                        <form action="" method="post">
-                        Ancien mot de passe
-                        <div class="input-group mb-3">
-                            <label for="exampleInputPassword1" class="form-label"></label>
-                            <input placeholder= 'MoTdEPAssE9!72?' name = "oldpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
-                        </div>
-                        Nouveau mot de passe
-                        <div class="input-group mb-3">
-                            <label for="exampleInputPassword1" class="form-label"></label>
-                            <input placeholder= 'MoTdEPAssE9!72?' name = "newpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
-                        </div>
-                        <input type="submit" value="Modifier">
-                        </form>
+                    <button class="btn btn-outline-secondary" type="button"data-toggle="collapse" data-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Modifier mot de passe</button>
+                    <div style="min-height: 120px;">
+                        <div class="collapse width" id="collapseWidthExample">
+                            <div class="card card-body" style="width: 320px;">
+                            <form action="" method="post">
+                            Ancien mot de passe
+                            <div class="input-group mb-3">
+                                <label for="exampleInputPassword1" class="form-label"></label>
+                                <input placeholder= 'MoTdEPAssE9!72?' name = "oldpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
+                            </div>
+                            Nouveau mot de passe
+                            <div class="input-group mb-3">
+                                <label for="exampleInputPassword1" class="form-label"></label>
+                                <input placeholder= 'MoTdEPAssE9!72?' name = "newpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
+                            </div>
+                            <input type="submit" value="Modifier">
+                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </p>
-
             </div>
             <?php if (isset($_GET['affiche']))
             {
