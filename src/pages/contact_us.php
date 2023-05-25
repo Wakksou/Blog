@@ -14,7 +14,12 @@ if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['sub
 
   if($mail->sendContactUs($Email,'MillePateStaff@gmail.com', $Name))
   {
-    echo 'message sent';
+    ?>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Merci!</h4>
+        <p>Votre message a bien été envoyé.</p>
+      </div>
+      <?php
   }
 }
 ?>
@@ -115,7 +120,6 @@ if (!empty ($_POST['name']) && !empty ( $_POST['email']) && !empty ( $_POST['sub
     <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../../assets/vendor/php-email-form/validate.js"></script>
     <!-- Template Main JS File -->
     <script src="../../assets/js/main.js"></script>
   </body>

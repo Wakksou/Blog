@@ -27,19 +27,6 @@ function inscription($mail,$pseudo,$ville,$mdp,$age)
     $requête -> execute(); 
 }
 
-function creerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps)
-{
-    $database = connectiondb ();
-    $request = " INSERT INTO recette (nom,description,image,auteur,temps) VALUES (:nom,:description,:image,:auteur,:temps) ";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":nom",$NomRecette,PDO::PARAM_STR);
-    $requête ->bindParam(":description",$DescriptionRecette,PDO::PARAM_STR);
-    $requête ->bindParam(":image",$image,PDO::PARAM_STR);
-    $requête ->bindParam(":auteur",$auteur,PDO::PARAM_STR);
-    $requête ->bindParam(":temps",$temps,PDO::PARAM_STR);
-    $requête -> execute(); 
-}
-
 function creerIngredients($ingredient,$Image)
 {
     $database = connectiondb ();
@@ -50,18 +37,7 @@ function creerIngredients($ingredient,$Image)
     $requête -> execute(); 
 }
 
-function getIdRecette(string $nom,$auteur) 
-{
-    $database = connectiondb ();
-    $request = "SELECT id FROM recette
-    WHERE nom=:nom AND auteur=:auteur"; 
-    $requête = $database->prepare($request);
-    $requête -> bindParam(":nom",$nom,PDO::PARAM_STR);
-    $requête -> bindParam(":auteur",$auteur,PDO::PARAM_STR);
-    $requête -> execute();
-    $result = $requête -> fetch();
-    return $result['id'] ;
-}
+
 
 function getutilisateur(string $mail) 
 {
@@ -165,26 +141,9 @@ function modifierMdp($mdp,$mail)
     $requête -> execute(); 
 }
 
-function getRecettes()
-{
-    $database = connectiondb();
-    $request = " SELECT * from recette";
-    $result = $database->query($request);
-    return $result;
-}
 
-function getIngredient($id)
-{
-    $database = connectiondb();
-    $request = "SELECT i.nom,i.image,q.quantite FROM recette as r
-    INNER JOIN quantites as q ON r.id=q.id_recette
-    INNER JOIN ingredient as i ON i.id = q.id_ingredient
-    WHERE r.id=:id";
-    $requête = $database ->prepare($request);
-    $requête -> execute(['id'=>$id]); 
-    $result= $requête ->fetchAll();
-    return $result;    
-}
+
+
 
 
 function getQuantites($id)
@@ -200,27 +159,9 @@ function getQuantites($id)
     return $result;    
 }
 
-function getEtape($id)
-{
-    $database = connectiondb();
-    $request = "SELECT nom,description,numero FROM etape as e
-    WHERE id_recette=:id ORDER BY numero ASC";
-    $requête = $database ->prepare($request);
-    $requête -> execute(['id'=>$id]); 
-    $result= $requête ->fetchAll();
-    return $result;
-}
 
-function getCommentaire($id)
-{
-    $database = connectiondb();
-    $request = "SELECT * FROM commentaires
-    WHERE id_recette=:id ORDER BY date DESC";
-    $requête = $database ->prepare($request);
-    $requête -> execute(['id'=>$id]); 
-    $result= $requête ->fetchAll();
-    return $result;
-}
+
+
 
 function getRecette($id)
 {
@@ -233,50 +174,7 @@ function getRecette($id)
     return $result;
 }
 
-function posterCom($commentaire,$date,$auteur,$id_recette)
-{
-    $database = connectiondb ();
-    $request = " INSERT INTO commentaires (commentaire,date,auteur,id_recette) VALUES (:commentaire,:date,:auteur,:id_recette) ";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":commentaire",$commentaire,PDO::PARAM_STR);
-    $requête ->bindParam(":date",$date,PDO::PARAM_STR);
-    $requête ->bindParam(":auteur",$auteur,PDO::PARAM_STR);
-    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_STR);
-    $requête -> execute(); 
-}
 
-function insererQuantites($id_recette,$id_ingredient,$quantite)
-{
-    $database = connectiondb ();
-    $request = " INSERT INTO quantites (id_recette,id_ingredient,quantite) VALUES (:id_recette,:id_ingredient,:quantite) ";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_INT);
-    $requête ->bindParam(":id_ingredient",$id_ingredient,PDO::PARAM_INT);
-    $requête ->bindParam(":quantite",$quantite,PDO::PARAM_STR);
-    $requête -> execute(); 
-}
-
-function insererEtapes($nom,$description,$numero,$id_recette)
-{
-    $database = connectiondb ();
-    $request = " INSERT INTO etape (nom,description,numero,id_recette) VALUES (:nom,:description,:numero,:id_recette) ";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":nom",$nom,PDO::PARAM_STR);
-    $requête ->bindParam(":description",$description,PDO::PARAM_STR);
-    $requête ->bindParam(":numero",$numero,PDO::PARAM_INT);
-    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_INT);
-    $requête -> execute(); 
-}
-
-function getAllUtilisateur() 
-{
-    $database = connectiondb ();
-    $request = "SELECT * FROM comptes";
-    $requête = $database->prepare($request);
-    $requête -> execute();
-    $result = $requête -> fetchAll();
-    return $result ;
-}
 
 function deleteUtilisateur($id)
 {
@@ -288,35 +186,7 @@ function deleteUtilisateur($id)
     $requête -> execute();
 }
 
-function deleteCommentaire($id)
-{
-    $database = connectiondb ();
-    $request = "DELETE FROM commentaires
-    WHERE id = :id";
-    $requête = $database->prepare($request);
-    $requête ->bindParam(":id",$id,PDO::PARAM_INT);
-    $requête -> execute();
-}
 
-function deleteRecette($id)
-{
-    $database = connectiondb ();
-    $request = "DELETE FROM recette
-    WHERE id = :id";
-    $requête = $database->prepare($request);
-    $requête ->bindParam(":id",$id,PDO::PARAM_INT);
-    $requête -> execute();
-}
-
-function deleteQuantites($id_recette)
-{
-    $database = connectiondb ();
-    $request = "DELETE FROM quantites
-    WHERE id_recette = :id_recette";
-    $requête = $database->prepare($request);
-    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_INT);
-    $requête -> execute();
-}
 
 function lastConnexion($date,$mail)
 {
@@ -330,34 +200,10 @@ function lastConnexion($date,$mail)
     $requête -> execute(); 
 }
 
-function getAllIngredients() 
-{
-    $database = connectiondb ();
-    $request = "SELECT * FROM ingredient";
-    $requête = $database->prepare($request);
-    $requête -> execute();
-    $result = $requête -> fetchAll();
-    return $result ;
-}
 
-function rechercheNom($rechercheNom) 
-{
-    $database = connectiondb ();
-    $request = "SELECT * FROM recette WHERE nom Like '%$rechercheNom%'";
-    $requête = $database->prepare($request);
-    $requête -> execute();
-    $result = $requête -> fetchAll();
-    return $result ;
-}
 
-function rechercheAuteur($recherche) 
-{
-    $database = connectiondb ();
-    $request = "SELECT * FROM recette WHERE auteur Like '%$recherche%'";
-    $requête = $database->prepare($request);
-    $requête -> execute();
-    $result = $requête -> fetchAll();
-    return $result ;
-}
+
+
+
 ?>
 

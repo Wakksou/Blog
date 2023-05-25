@@ -1,7 +1,8 @@
 
 <?php
-require "../fonction.php";
-require "../header.php";
+require "../../../fonctions/fonctionRecette.php";
+require "../../../header.php";
+require "../../../fonction.php";
 
 if (empty ($_SESSION['email']))
 {
@@ -22,7 +23,7 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
       {
         creerRecette($NomRecette,$DescriptionRecette,$image,$auteur,$temps);
         $id_recette=getIdRecette($NomRecette,$auteur);
-        header ('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
+        header ('Location: http://localhost/Blog/Blog/src/pages/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
       }
       catch(PDOException $e)
       {
@@ -36,26 +37,26 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Contactez-nous</title>
+    <title>Créer votre recette</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon">
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../../../assets/img/favicon.png" rel="icon">
+    <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../../../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../../../assets/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: TheEvent
@@ -72,9 +73,8 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
           <h2>Créer votre recette</h2>
           <p>créer votre recette pour que d'autres puissent en profiter !</p>
         </div>
-
         <div class="form">
-          <form action="" method="post" role="form" class="php-email-form">
+          <form action="creerRecette.php" method="post" role="form" class="php-email-form">
             <div class="row">
               <div class="form-group col-md-6">
                 <input type="text" name="NomRecette" class="form-control" id="name" placeholder="Nom de la recette" required>
@@ -93,24 +93,26 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
                 
               <div class="form-group col-md-6" >Nombre d'ingrédients
                 <select class="form-control" id="NombreIngredient" name="NombreIngredients">
-      <?php 
-      for ($i=1;$i<=12;$i++)
-      { ?>
-      <option value=<?=$i?>><?=$i?></option>
-      <?php }
-      ?>
-    </select>
+                  <?php 
+                  for ($i=1;$i<=12;$i++)
+                  { ?>
+                    <option value=<?=$i?>><?=$i?></option>
+                  <?php 
+                  }
+                  ?>
+                </select>
               </div>
               <div class="form-group col-md-6 mt-5 mt-md-0">Nombre d'étapes
-              <label for="exampleFormControlSelect1">Nombre d'étape dans la préparation</label>
-    <select class="form-control" id="NombreEtape" name="NombreEtape">
-    <?php 
-      for ($n=1;$n<=10;$n++)
-      { ?>
-      <option value=<?=$n?>><?=$n?></option>
-      <?php }
-      ?>
-    </select>
+                <label for="exampleFormControlSelect1">Nombre d'étape dans la préparation</label>
+                <select class="form-control" id="NombreEtape" name="NombreEtape">
+                  <?php 
+                  for ($n=1;$n<=10;$n++)
+                  { ?>
+                    <option value=<?=$n?>><?=$n?></option>
+                  <?php 
+                  }
+                  ?>
+                </select>
               </div>
             </div>
             <div class="my-3">
@@ -124,12 +126,11 @@ if (!empty ($_POST['NomRecette']) && !empty ( $_POST['DescriptionRecette']) && !
       </div>
     </section>
     <!-- Vendor JS Files -->
-    <script src="../assets/vendor/aos/aos.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../../assets/vendor/aos/aos.js"></script>
+    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../../assets/vendor/swiper/swiper-bundle.min.js"></script>
     <!-- Template Main JS File -->
-    <script src="../assets/js/main.js"></script>
+    <script src="../../../assets/js/main.js"></script>
   </body>
 <html>

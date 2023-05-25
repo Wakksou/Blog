@@ -7,7 +7,7 @@ if (isset($_GET['id']))
 ?>
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Modification du profil enregistré !</h4>
-        Les modifications seront effectué lors de la prochaine connexion
+        Les modifications seront effectuées lors de la prochaine connexion
     </div>
 <?php
 }
@@ -79,7 +79,6 @@ if (isset($_GET['id']))
                   <li><i class="bi bi-chevron-right"></i> <strong>Ville:</strong> <span><?= $_SESSION['Ville'] ?></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Mail:</strong> <span><?= $_SESSION['email'] ?></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span><?= $_SESSION['Age'] ?></span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Vos recette:</strong> <span>recette</span></li>
                 </ul>
                 <a href='http://localhost/Blog/Blog/compte/profilModifier.php'>
                 <button>Modifier Profil</button>

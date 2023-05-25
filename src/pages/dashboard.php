@@ -1,6 +1,7 @@
 <?php 
 require '../../header.php';
 require "../../fonction.php";
+require "../../fonctions/fonctionDashboard.php";
 $Users=getAllUtilisateur();
 $i=1;
 
@@ -106,7 +107,7 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) && !empty ( $_POST[
               <label for="exampleInputPassword1" class="form-label"></label>
               <input placeholder= 'MoTdEPAssE9!72?' name = "password" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
             </div>
-            <input type="submit" value="Modifier">
+            <input type="submit" value="Ajouter">
           </form>
         </div>
       </p>

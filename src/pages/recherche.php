@@ -1,6 +1,8 @@
 <?php 
 require '../../header.php';
 require '../../fonction.php';
+require '../../fonctions/fonctionIndex.php';
+require '../../fonctions/fonctionRecherche.php';
 
 if (isset($_GET['id'])) //verifier qu'il a bien validé la page d'avant
 {

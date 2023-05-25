@@ -1,6 +1,7 @@
 <?php 
 require '../../header.php';
 require '../../fonction.php';
+require '../../fonctions/fonctionIndex.php';
 $recettes=getRecettes();
 if (isset ($_GET['get']))
 {

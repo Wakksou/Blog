@@ -1,5 +1,6 @@
 <?php
-require 'fonction.php';
+require '../../../fonctions/fonctionRecette.php';
+
 if (isset($_GET['id']))
 {
     $id_recette=$_GET['id'];

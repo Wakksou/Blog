@@ -1,6 +1,8 @@
 <?php 
 require '../../header.php';
 require "../../fonction.php";
+require "../../fonctions/fonctionIndex.php";
+require "../../fonctions/fonctionsCommentaire/supprimerCom.php";
 $recettes=getRecettes();
 
 if (isset($_GET['id']))
