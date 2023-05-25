@@ -1,5 +1,7 @@
 <?php
-require 'fonction.php';
+require '../../fonctions/fonctionsCommentaire/fonctionCommentaire.php';
+require "../../fonctions/fonctionUser.php";
+
 if (isset($_GET['id']))
 {
     $id=$_GET['id'];

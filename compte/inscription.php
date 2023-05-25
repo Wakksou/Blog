@@ -1,11 +1,10 @@
 <?php 
 require '../header.php';
-require '../fonction.php';
+require "../fonctions/fonctionUser.php";
 
 if (!empty ($_POST['email']) && !empty ( $_POST['password']) && !empty ( $_POST['pseudo']) && !empty ( $_POST['ville']) 
 && !empty ( $_POST['age']) ) 
 {
-
     $mail=$_POST['email'];
     $password=$_POST['password'];
     $pseudo=$_POST['pseudo'];
@@ -19,14 +18,14 @@ if (!empty ($_POST['email']) && !empty ( $_POST['password']) && !empty ( $_POST[
 
     try 
         {
-inscription($mail,$pseudo,$ville,$passwordHashe,$age);
-}
-        catch(PDOException $e)
-        {
-            echo $e->getMessage();
+          inscription($mail,$pseudo,$ville,$passwordHashe,$age);
         }
+    catch(PDOException $e)
+    {
+      echo $e->getMessage();
+    }
     
-        header ('Location: http://localhost/Blog/Blog/compte/connexion.php?id=1');
+  header ('Location: http://localhost/Blog/Blog/compte/connexion.php?id=1');
 }
 ?>
 
@@ -41,21 +40,21 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon">
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets1/img/favicon.png" rel="icon">
+    <link href="../assets1/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../assets1/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets1/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets1/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets1/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets1/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets1/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: TheEvent
@@ -71,10 +70,8 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
         <div class="section-header">
           <h2>Inscription</h2>
         </div>
-
         <div class="form">
           <form action="inscription.php" method="post" role="form" class="php-email-form">
-
             <div class="form-group mt-3">
               <input class="form-control" name="email" rows="5" placeholder="VotreMail@mail.com" required></input>
             </div>
@@ -90,7 +87,6 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
             <div class="form-group mt-3">
               <input class="form-control" type= "password" name="password" rows="5" placeholder="mot de passe" required></input>
             </div>
-
             <div class="my-3">
               <div class="loading">Chargement</div>
               <div class="error-message"></div>
@@ -102,12 +98,14 @@ inscription($mail,$pseudo,$ville,$passwordHashe,$age);
       </div>
     </section>
     <!-- Vendor JS Files -->
-    <script src="../assets/vendor/aos/aos.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets1/vendor/aos/aos.js"></script>
+    <script src="../assets1/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets1/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../assets1/vendor/swiper/swiper-bundle.min.js"></script>
     <!-- Template Main JS File -->
-    <script src="../assets/js/main.js"></script>
+    <script src="../assets1/js/main.js"></script>
+  </body>
+</html>
 
 
 

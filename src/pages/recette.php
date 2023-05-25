@@ -1,8 +1,7 @@
 <?php 
 require '../../header.php';
-require "../../fonction.php";
 require "../../fonctions/fonctionIndex.php";
-require "../../fonctions/fonctionsCommentaire/supprimerCom.php";
+require "../../fonctions/fonctionsCommentaire/fonctionCommentaire.php";
 $recettes=getRecettes();
 
 if (isset($_GET['id']))
@@ -218,7 +217,7 @@ foreach ($Recettes as $Recette)
                     if ($_SESSION['email']=='maxime.dingival@hotmail.com'||$_SESSION['Pseudo']==$commentaire['auteur'])
                     { 
                     ?>
-                      <a href='http://localhost/Blog/Blog/supprimerCom.php?id=<?=$commentaire['id']?>&recette_id=<?=$recette_id?>'>
+                      <a href='http://localhost/Blog/Blog/src/pages/supprimerCom.php?id=<?=$commentaire['id']?>&recette_id=<?=$recette_id?>'>
                         <button type="button" class="btn btn-outline-secondary">Supprimer</button>
                       </a>
                     <?php

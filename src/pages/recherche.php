@@ -1,6 +1,5 @@
 <?php 
 require '../../header.php';
-require '../../fonction.php';
 require '../../fonctions/fonctionIndex.php';
 require '../../fonctions/fonctionRecherche.php';
 

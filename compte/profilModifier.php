@@ -1,6 +1,6 @@
 <?php
-require "../fonction.php";
 require "../header.php";
+require "../fonctions/fonctionUser.php";
 
 
 if (!empty ( $_POST['password']) )
@@ -45,7 +45,6 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
 
     if (password_verify($_POST['oldpassword'],getmdp($_SESSION['email'])) )
     {
-
         $newmdp=$_POST['newpassword'];
         $mail=$_SESSION['email'];
 
@@ -55,13 +54,13 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
         $NewpasswordHashe=password_hash($newmdp, PASSWORD_BCRYPT, $options);
 
         try 
-            {
-        modifierMdp($NewpasswordHashe,$mail);
-    }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
+        {
+            modifierMdp($NewpasswordHashe,$mail);
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
     }
     else 
     {
@@ -96,30 +95,29 @@ if (!empty ( $_POST['oldpassword'])&& !empty ( $_POST['newpassword']))
             <div class="input-group mb-3">
                 <label for="exampleInputPassword1" class="form-label"></label>
                 <input placeholder= 'MoTdEPAssE9!72?' name = "password" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
-                
+
                 <p>
-                <button class="btn btn-outline-secondary" type="button"data-toggle="collapse" data-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Modifier mot de passe</button>
-                <div style="min-height: 120px;">
-                    <div class="collapse width" id="collapseWidthExample">
-                        <div class="card card-body" style="width: 320px;">
-                        <form action="" method="post">
-                        Ancien mot de passe
-                        <div class="input-group mb-3">
-                            <label for="exampleInputPassword1" class="form-label"></label>
-                            <input placeholder= 'MoTdEPAssE9!72?' name = "oldpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
-                        </div>
-                        Nouveau mot de passe
-                        <div class="input-group mb-3">
-                            <label for="exampleInputPassword1" class="form-label"></label>
-                            <input placeholder= 'MoTdEPAssE9!72?' name = "newpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
-                        </div>
-                        <input type="submit" value="Modifier">
-                        </form>
+                    <button class="btn btn-outline-secondary" type="button"data-toggle="collapse" data-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Modifier mot de passe</button>
+                    <div style="min-height: 120px;">
+                        <div class="collapse width" id="collapseWidthExample">
+                            <div class="card card-body" style="width: 320px;">
+                            <form action="" method="post">
+                            Ancien mot de passe
+                            <div class="input-group mb-3">
+                                <label for="exampleInputPassword1" class="form-label"></label>
+                                <input placeholder= 'MoTdEPAssE9!72?' name = "oldpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
+                            </div>
+                            Nouveau mot de passe
+                            <div class="input-group mb-3">
+                                <label for="exampleInputPassword1" class="form-label"></label>
+                                <input placeholder= 'MoTdEPAssE9!72?' name = "newpassword" type="password" class="form-control" id="exampleInputPassword1" class="form-text">
+                            </div>
+                            <input type="submit" value="Modifier">
+                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </p>
-
             </div>
             <?php if (isset($_GET['affiche']))
             {

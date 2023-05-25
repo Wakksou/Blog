@@ -13,6 +13,6 @@ if (isset($_GET['id']))
         echo $e->getMessage();
     }
 }
-header('Location: http://localhost/Blog/Blog/CreerUneRecette/creerRecette.php');
+header('Location: http://localhost/Blog/Blog/src/pages/CreerUneRecette/creerRecette.php');
 exit();
 ?>

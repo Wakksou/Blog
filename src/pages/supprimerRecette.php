@@ -1,11 +1,14 @@
 <?php
-require "../fonctions/fonctionUser.php";
+require '../../fonctions/fonctionRecette.php';
+
 if (isset($_GET['id']))
 {
-    $id=$_GET['id'];
+    $id_recette=$_GET['id'];
     try 
     {
-        deleteUtilisateur($id);
+        deleteEtapes($id_recette);
+        deleteQuantites($id_recette);
+        deleteRecette($id_recette);
     }
     catch(PDOException $e)
     {
@@ -14,5 +17,4 @@ if (isset($_GET['id']))
 }
 header('Location: http://localhost/Blog/Blog/src/pages/dashboard.php');
 exit();
-
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function connectiondb () : PDO
 {
@@ -27,17 +27,57 @@ function inscription($mail,$pseudo,$ville,$mdp,$age)
     $requête -> execute(); 
 }
 
-function creerIngredients($ingredient,$Image)
+function lastConnexion($date,$mail)
 {
     $database = connectiondb ();
-    $request = " INSERT INTO ingredient (nom,image) VALUES (:nom,:image) ";
+    $request = " UPDATE comptes 
+    SET LastConnexion= :LastConnexion 
+    WHERE Mail = :mail";
     $requête = $database ->prepare($request);
-    $requête ->bindParam(":nom",$ingredient,PDO::PARAM_STR);
-    $requête ->bindParam(":image",$Image,PDO::PARAM_STR);
+    $requête ->bindParam(":LastConnexion",$date,PDO::PARAM_STR);
+    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
     $requête -> execute(); 
 }
 
+function deleteUtilisateur($id)
+{
+    $database = connectiondb ();
+    $request = "DELETE FROM comptes
+    WHERE IDCompte = :id";
+    $requête = $database->prepare($request);
+    $requête ->bindParam(":id",$id,PDO::PARAM_INT);
+    $requête -> execute();
+}
 
+function modifierMdp($mdp,$mail)
+{
+    $database = connectiondb ();
+    $request = " UPDATE comptes
+    SET Motdepasse = :mdp
+    WHERE Mail = :mail";
+    $requête = $database ->prepare($request);
+    $requête ->bindParam(":mdp",$mdp,PDO::PARAM_STR);
+    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
+    $requête -> execute(); 
+}
+
+function modifierProfil($newmail,$pseudo,$ville,$age,$mail)
+{
+    $database = connectiondb ();
+    $request = " UPDATE comptes
+    SET Mail = :newmail,
+    Pseudo = :pseudo,
+    Age = :age,
+    Ville = :ville
+    WHERE Mail = :mail";
+    $requête = $database ->prepare($request);
+    $requête ->bindParam(":newmail",$newmail,PDO::PARAM_STR);
+    $requête ->bindParam(":pseudo",$pseudo,PDO::PARAM_STR);
+    $requête ->bindParam(":age",$age,PDO::PARAM_INT);
+    $requête ->bindParam(":ville",$ville,PDO::PARAM_STR);
+    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
+    $requête -> execute(); 
+}
 
 function getutilisateur(string $mail) 
 {
@@ -110,100 +150,4 @@ function getage(string $mail)
     $result = $requête -> fetch(); 
     return $result["Age"] ;
 }
-
-function modifierProfil($newmail,$pseudo,$ville,$age,$mail)
-{
-    $database = connectiondb ();
-    $request = " UPDATE comptes
-    SET Mail = :newmail,
-    Pseudo = :pseudo,
-    Age = :age,
-    Ville = :ville
-    WHERE Mail = :mail";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":newmail",$newmail,PDO::PARAM_STR);
-    $requête ->bindParam(":pseudo",$pseudo,PDO::PARAM_STR);
-    $requête ->bindParam(":age",$age,PDO::PARAM_INT);
-    $requête ->bindParam(":ville",$ville,PDO::PARAM_STR);
-    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
-    $requête -> execute(); 
-}
-
-function modifierMdp($mdp,$mail)
-{
-    $database = connectiondb ();
-    $request = " UPDATE comptes
-    SET Motdepasse = :mdp
-    WHERE Mail = :mail";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":mdp",$mdp,PDO::PARAM_STR);
-    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
-    $requête -> execute(); 
-}
-
-
-
-
-
-
-function getQuantites($id)
-{
-    $database = connectiondb();
-    $request = "SELECT i.nom,i.image FROM recette as r
-    INNER JOIN quantites as q ON r.id=q.id_recette
-    INNER JOIN ingredient as i ON i.id = q.id_ingredient
-    WHERE r.id=:id";
-    $requête = $database ->prepare($request);
-    $requête -> execute(['id'=>$id]); 
-    $result= $requête ->fetchAll();
-    return $result;    
-}
-
-
-
-
-
-function getRecette($id)
-{
-    $database = connectiondb();
-    $request = "SELECT * FROM recette
-    WHERE id=:id";
-    $requête = $database ->prepare($request);
-    $requête -> execute(['id'=>$id]); 
-    $result= $requête ->fetchAll();
-    return $result;
-}
-
-
-
-function deleteUtilisateur($id)
-{
-    $database = connectiondb ();
-    $request = "DELETE FROM comptes
-    WHERE IDCompte = :id";
-    $requête = $database->prepare($request);
-    $requête ->bindParam(":id",$id,PDO::PARAM_INT);
-    $requête -> execute();
-}
-
-
-
-function lastConnexion($date,$mail)
-{
-    $database = connectiondb ();
-    $request = " UPDATE comptes 
-    SET LastConnexion= :LastConnexion 
-    WHERE Mail = :mail";
-    $requête = $database ->prepare($request);
-    $requête ->bindParam(":LastConnexion",$date,PDO::PARAM_STR);
-    $requête ->bindParam(":mail",$mail,PDO::PARAM_STR);
-    $requête -> execute(); 
-}
-
-
-
-
-
-
 ?>
-

@@ -1,4 +1,5 @@
 <?php
+require "fonctionUser.php";
 
 function getRecettes()
 {
@@ -30,5 +31,29 @@ function getEtape($id)
     $requête -> execute(['id'=>$id]); 
     $result= $requête ->fetchAll();
     return $result;
+}
+
+function getRecette($id)
+{
+    $database = connectiondb();
+    $request = "SELECT * FROM recette
+    WHERE id=:id";
+    $requête = $database ->prepare($request);
+    $requête -> execute(['id'=>$id]); 
+    $result= $requête ->fetchAll();
+    return $result;
+}
+
+function getQuantites($id)
+{
+    $database = connectiondb();
+    $request = "SELECT i.nom,i.image FROM recette as r
+    INNER JOIN quantites as q ON r.id=q.id_recette
+    INNER JOIN ingredient as i ON i.id = q.id_ingredient
+    WHERE r.id=:id";
+    $requête = $database ->prepare($request);
+    $requête -> execute(['id'=>$id]); 
+    $result= $requête ->fetchAll();
+    return $result;    
 }
 ?>

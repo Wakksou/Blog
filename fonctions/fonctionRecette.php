@@ -1,4 +1,5 @@
 <?php
+require "fonctionUser.php";
 
 function deleteQuantites($id_recette)
 {
@@ -17,6 +18,16 @@ function deleteRecette($id)
     WHERE id = :id";
     $requête = $database->prepare($request);
     $requête ->bindParam(":id",$id,PDO::PARAM_INT);
+    $requête -> execute();
+}
+
+function deleteEtapes($id_recette)
+{
+    $database = connectiondb ();
+    $request = "DELETE FROM etape
+    WHERE id_recette = :id_recette";
+    $requête = $database->prepare($request);
+    $requête ->bindParam(":id_recette",$id_recette,PDO::PARAM_INT);
     $requête -> execute();
 }
 

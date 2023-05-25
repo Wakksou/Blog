@@ -16,6 +16,6 @@ if (isset($_GET['id']))
         echo $e->getMessage();
     }
 }
-header('Location: http://localhost/Blog/Blog/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
+header('Location: http://localhost/Blog/Blog/src/pages/CreerUneRecette/CreerIngredients.php?id='.$NombreIngredients.'&Etapeid='.$NombreEtape.'&recette_id='.$id_recette);
 exit();
 ?>

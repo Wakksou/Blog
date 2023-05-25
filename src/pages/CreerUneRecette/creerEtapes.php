@@ -1,7 +1,6 @@
 <?php 
 require "../../../fonctions/fonctionRecette.php";
 require "../../../header.php";
-require "../../../fonction.php";
 $check=true;
 
 if (isset($_GET['id']))
@@ -16,8 +15,8 @@ for ($o=1;$o<=$NombreEtape;$o++) //verifier qu'il a bien tout remplis
 {
   if (empty ($_POST['Etape'.$o])) 
   {
-  $check=false; 
-  break;
+    $check=false; 
+    break;
   }
 }
 
@@ -44,21 +43,21 @@ if ($check==true)
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../../../assets/img/favicon.png" rel="icon">
-    <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../../../assets1/img/favicon.png" rel="icon">
+    <link href="../../../assets1/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../../../assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../../../assets1/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../../../assets1/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets1/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../../assets1/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../../../assets1/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="../../../assets/css/style.css" rel="stylesheet">
+    <link href="../../../assets1/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: TheEvent
@@ -97,12 +96,12 @@ if ($check==true)
       </div>
     </section>
     <!-- Vendor JS Files -->
-    <script src="../../../assets/vendor/aos/aos.js"></script>
-    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../../assets1/vendor/aos/aos.js"></script>
+    <script src="../../../assets1/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets1/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../../assets1/vendor/swiper/swiper-bundle.min.js"></script>
     <!-- Template Main JS File -->
-    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets1/js/main.js"></script>
     <a href='http://localhost/Blog/Blog/src/pages/CreerUneRecette/annulerQuantites?id=<?=$NombreIngredients?>&Etapeid=<?=$NombreEtape?>&recette_id=<?=$id_recette?>'>
     <button type="button" class="btn btn-outline-secondary">Annuler</button>
   </body>

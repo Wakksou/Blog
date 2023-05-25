@@ -1,5 +1,6 @@
 <?php
 
+
 function posterCom($commentaire,$date,$auteur,$id_recette)
 {
     $database = connectiondb ();

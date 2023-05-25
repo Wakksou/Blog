@@ -1,4 +1,5 @@
 <?php
+
 function getAllUtilisateur() 
 {
     $database = connectiondb ();
