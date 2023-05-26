@@ -1,5 +1,4 @@
 <?php
-require "fonctionUser.php";
 
 function rechercheNom($rechercheNom) 
 {
